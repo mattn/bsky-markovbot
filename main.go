@@ -158,7 +158,8 @@ func run(dryrun bool) error {
 			},
 		})
 		if err == nil {
-			fmt.Println(resp.Uri)
+			log.Println(result)
+			log.Println(resp.Uri)
 			return nil
 		}
 		log.Printf("failed to create post: %v", err)
@@ -167,8 +168,6 @@ func run(dryrun bool) error {
 	}
 
 	return fmt.Errorf("failed to create post: %w", lastErr)
-
-	return nil
 }
 
 func main() {
