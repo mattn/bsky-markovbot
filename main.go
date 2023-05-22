@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	_ "embed"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -69,7 +70,7 @@ func contains(a []string, s string) bool {
 	return false
 }
 
-func run(dryrun bool) error {
+func run(dryrun bool, word string) error {
 	length := -1
 
 	var bot Bot
@@ -121,13 +122,22 @@ func run(dryrun bool) error {
 		"補助記号",
 	}
 	var result string
+	var limit int
 	for {
+		if limit++; limit > 500 {
+			return errors.New("retry max")
+		}
 		var first string
-		for {
-			first = m.First()
-			tokens := t.Tokenize(first)
-			if !contains(bad, tokens[0].Features()[0]) {
-				break
+		if word != "" {
+			first = word
+			word = ""
+		} else {
+			for {
+				first = m.First()
+				tokens := t.Tokenize(first)
+				if !contains(bad, tokens[0].Features()[0]) {
+					break
+				}
 			}
 		}
 
@@ -182,7 +192,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	if err := run(dryrun); err != nil {
+	if err := run(dryrun, flag.Arg(0)); err != nil {
 		log.Fatal(err)
 	}
 }
