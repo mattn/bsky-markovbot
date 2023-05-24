@@ -133,6 +133,9 @@ func run(dryrun bool, word string) error {
 			word = ""
 		} else {
 			for {
+				if limit++; limit > 500 {
+					return errors.New("retry max")
+				}
 				first = m.First()
 				tokens := t.Tokenize(first)
 				if !contains(bad, tokens[0].Features()[0]) {
