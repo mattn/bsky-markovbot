@@ -6,7 +6,7 @@ require (
 	github.com/bluesky-social/indigo v0.0.0-20230418225919-0ea3242f9f46
 	github.com/ikawaha/kagome-dict/uni v1.1.9
 	github.com/ikawaha/kagome/v2 v2.9.2
-	github.com/mattn/go-markov v0.0.3
+	github.com/mattn/go-markov v0.0.4
 )
 
 require (
