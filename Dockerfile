@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1.4
 
-FROM golang:1.20-alpine AS build-dev
+FROM golang:1.21-alpine AS build-dev
 WORKDIR /go/src/app
 COPY --link go.mod go.sum ./
-RUN apk add --no-cache upx gcc musl-dev || \
+RUN apk --update add --no-cache upx gcc musl-dev || \
     go version && \
     go mod download
 COPY --link . .
@@ -13,4 +13,3 @@ FROM scratch
 COPY --link --from=build-dev /go/bin/bsky-markovbot /go/bin/bsky-markovbot
 COPY --from=build-dev /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 CMD ["/go/bin/bsky-markovbot"]
-
