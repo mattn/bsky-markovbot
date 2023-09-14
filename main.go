@@ -13,8 +13,8 @@ import (
 
 	comatproto "github.com/bluesky-social/indigo/api/atproto"
 	"github.com/bluesky-social/indigo/api/bsky"
-	cliutil "github.com/bluesky-social/indigo/cmd/gosky/util"
 	lexutil "github.com/bluesky-social/indigo/lex/util"
+	cliutil "github.com/bluesky-social/indigo/util/cliutil"
 	"github.com/bluesky-social/indigo/xrpc"
 	"github.com/ikawaha/kagome-dict/uni"
 	"github.com/ikawaha/kagome/v2/tokenizer"
